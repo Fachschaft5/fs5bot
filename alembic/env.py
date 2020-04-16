@@ -33,6 +33,7 @@ sys.path.append(ROOT_PATH)
 
 # import models
 from models.extension import Extension
+from models.user import User
 from models.base import Base
 
 # set metadata
