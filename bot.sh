@@ -50,7 +50,7 @@ update_all() {
 }
 language_update() {
     # get all textes in python files
-    find . -iname "*.py" | xargs xgettext -d base -p languages -L Python
+    find . -iname "*.py" -not -path '*/venv/*'| xargs xgettext -d base -p languages -L Python
 
     # cd to languages folder 
     cd languages/
