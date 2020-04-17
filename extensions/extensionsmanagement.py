@@ -1,17 +1,19 @@
 import discord
-from utilities import _
 from discord.ext import commands
-from models.extension import Extension
+
 from db import db_session
+from models.extension import Extension
+from utilities import _
+
 
 class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
     def __init__(self, bot):
         self.bot = bot
         self.extensions_dir = 'extensions.'
         self.extension_blacklist = [
-            'extensionsmanagement' 
+            'extensionsmanagement'
         ]
-    
+
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def load(self, ctx, extension: str):
@@ -33,7 +35,7 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
                 else:
                     extension_object = Extension(extension, True)
                     db_session.add(extension_object)
-                
+
                 # commit update
                 db_session.commit()
 
@@ -41,8 +43,8 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
             except Exception as e:
                 # create output embed
                 embed = discord.Embed(
-                    colour = discord.Colour.red(),
-                    title = _("extension not loaded, {extension}").format(extension=extension)
+                    colour=discord.Colour.red(),
+                    title=_("extension not loaded, {extension}").format(extension=extension)
                 )
                 embed.add_field(name=_("Errors"), value="{}: {}".format(type(e).__name__, e), inline=False)
 
@@ -51,16 +53,16 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
             else:
                 # create output embed
                 embed = discord.Embed(
-                    colour = discord.Colour.green(),
-                    title = _("extension successfully loaded, {extension}").format(extension=extension)
+                    colour=discord.Colour.green(),
+                    title=_("extension successfully loaded, {extension}").format(extension=extension)
                 )
                 # send embed
                 await ctx.send(embed=embed)
         else:
             # create output embed
             embed = discord.Embed(
-                colour = discord.Colour.red(),
-                title = _("extension not loaded, {extension}").format(extension=extension)
+                colour=discord.Colour.red(),
+                title=_("extension not loaded, {extension}").format(extension=extension)
             )
             embed.add_field(name=_("Errors"), value=_("extension blacklist"), inline=False)
 
@@ -69,7 +71,7 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def unload(self, ctx, extension : str):
+    async def unload(self, ctx, extension: str):
         # prepare extension string
         extension = extension.lower()
 
@@ -87,15 +89,15 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
                 else:
                     extension_object = Extension(extension, False)
                     db_session.add(extension_object)
-                
+
                 # commit update
                 db_session.commit()
 
             except Exception as e:
                 # create output embed
                 embed = discord.Embed(
-                    colour = discord.Colour.red(),
-                    title = _("extension not unloaded, {extension}").format(extension=extension)
+                    colour=discord.Colour.red(),
+                    title=_("extension not unloaded, {extension}").format(extension=extension)
                 )
                 embed.add_field(name=_("Errors"), value="{}: {}".format(type(e).__name__, e), inline=False)
 
@@ -104,16 +106,16 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
             else:
                 # create output embed
                 embed = discord.Embed(
-                    colour = discord.Colour.green(),
-                    title = _("extension successfully unloaded, {extension}").format(extension=extension)
+                    colour=discord.Colour.green(),
+                    title=_("extension successfully unloaded, {extension}").format(extension=extension)
                 )
                 # send embed
                 await ctx.send(embed=embed)
         else:
             # create output embed
             embed = discord.Embed(
-                colour = discord.Colour.red(),
-                title = _("extension not unloaded, {extension}").format(extension=extension)
+                colour=discord.Colour.red(),
+                title=_("extension not unloaded, {extension}").format(extension=extension)
             )
             embed.add_field(name=_("Errors"), value=_("extension blacklist"), inline=False)
 
@@ -122,7 +124,7 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def reload(self, ctx, extension : str):
+    async def reload(self, ctx, extension: str):
         # prepare extension string
         extension = extension.lower()
 
@@ -135,8 +137,8 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
             except Exception as e:
                 # create output embed
                 embed = discord.Embed(
-                    colour = discord.Colour.red(),
-                    title = _("extension not reloaded, {extension}").format(extension=extension)
+                    colour=discord.Colour.red(),
+                    title=_("extension not reloaded, {extension}").format(extension=extension)
                 )
                 embed.add_field(name=_("Errors"), value="{}: {}".format(type(e).__name__, e), inline=False)
 
@@ -145,16 +147,16 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
             else:
                 # create output embed
                 embed = discord.Embed(
-                    colour = discord.Colour.green(),
-                    title = _("extension successfully reloaded, {extension}").format(extension=extension)
+                    colour=discord.Colour.green(),
+                    title=_("extension successfully reloaded, {extension}").format(extension=extension)
                 )
                 # send embed
                 await ctx.send(embed=embed)
         else:
             # create output embed
             embed = discord.Embed(
-                colour = discord.Colour.red(),
-                title = _("extension not reloaded, {extension}").format(extension=extension)
+                colour=discord.Colour.red(),
+                title=_("extension not reloaded, {extension}").format(extension=extension)
             )
             embed.add_field(name=_("Errors"), value=_("extension blacklist"), inline=False)
 
@@ -167,12 +169,12 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
 
         # create output embeds
         embed_loaded = discord.Embed(
-            colour = discord.Colour.green(),
-            title = _("loaded extensions")
+            colour=discord.Colour.green(),
+            title=_("loaded extensions")
         )
         embed_unloaded = discord.Embed(
-            colour = discord.Colour.red(),
-            title = _("unloaded extensions")
+            colour=discord.Colour.red(),
+            title=_("unloaded extensions")
         )
 
         # get loaded extension
@@ -194,6 +196,7 @@ class ExtensionsManagement(commands.Cog, name='ExtensionsManagement'):
         # send embeds
         await ctx.send(embed=embed_loaded)
         await ctx.send(embed=embed_unloaded)
+
 
 def setup(bot):
     bot.add_cog(ExtensionsManagement(bot))

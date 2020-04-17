@@ -1,19 +1,21 @@
-import discord
 import logging
 import sys
 from datetime import datetime
-from utilities import getConfig
+
+import discord
 from discord.ext import commands
+
 from models.extension import Extension
-import db
+from utilities import get_config
+
 
 class FS5Bot(commands.AutoShardedBot):
     def __init__(self):
         # get config
-        self.config = getConfig()
+        self.config = get_config()
 
         # setup logger if logging is true
-        if(self.config['bot']['logging'] == 'true'):
+        if self.config['bot']['logging'] == 'true':
             # get loggers
             self.discordLogger = logging.getLogger('discord')
             self.sqlalchemyLogger = logging.getLogger('sqlalchemy.engine')
@@ -21,9 +23,10 @@ class FS5Bot(commands.AutoShardedBot):
             # set debug levels
             self.discordLogger.setLevel((logging.DEBUG if self.config['bot']['debug'] == 'true' else logging.ERROR))
             self.sqlalchemyLogger.setLevel((logging.DEBUG if self.config['bot']['debug'] == 'true' else logging.ERROR))
-            
+
             # setup handler
-            handler = logging.FileHandler(filename=datetime.now().strftime('logs/log%Y-%m-%d_%H-%M-%S.log'), encoding='utf-8', mode='w')
+            handler = logging.FileHandler(filename=datetime.now().strftime('logs/log%Y-%m-%d_%H-%M-%S.log'),
+                                          encoding='utf-8', mode='w')
             handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 
             # add handlers
@@ -53,14 +56,14 @@ class FS5Bot(commands.AutoShardedBot):
 
     async def on_ready(self):
         # log logged in if logging is true
-        if(self.config['bot']['logging'] == 'true'):
+        if self.config['bot']['logging'] == 'true':
             self.discordLogger.info('Logged in as "' + self.user.name + '" [ID: ' + str(self.user.id) + ']')
 
         # set presence
         await self.change_presence(activity=discord.Activity(
             name=self.config['bot']['status_name'],
             type=discord.ActivityType.playing))
-    
+
     def run(self):
         # try to run bot
         try:
@@ -78,5 +81,5 @@ class FS5Bot(commands.AutoShardedBot):
             self.close()
 
             # log exception if logging is true
-            if(self.config['bot']['logging'] == 'true'):
+            if self.config['bot']['logging'] == 'true':
                 self.discordLogger.exception("Bot run exception")

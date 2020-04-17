@@ -1,16 +1,17 @@
 import configparser
-import os
 import gettext
+import os
 
 # get constants
-DIR = os.path.join(os.getcwd(), '')
+DIR: str = os.path.join(os.getcwd(), '')
 
 # setup gettext
 el = gettext.translation('base', localedir='languages', languages=['de'])
 el.install()
 _ = el.gettext
 
-def getConfig():
+
+def get_config() -> configparser.ConfigParser:
     # create config
     config = configparser.ConfigParser()
 

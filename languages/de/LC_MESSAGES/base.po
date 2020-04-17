@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-25 02:02+0100\n"
+"POT-Creation-Date: 2020-04-16 20:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Kirch, Titus <requests@tkirch.dev>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,72 +17,126 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extensions/extensionsmanagement.py:45 extensions/extensionsmanagement.py:63
+#: verification/server.py:36
+msgid "language"
+msgstr "de"
+
+#: verification/server.py:36
+msgid "you can close this window now"
+msgstr "Du kannst das Fenster jetzt schließen"
+
+#: extensions/extensionsmanagement.py:47 extensions/extensionsmanagement.py:65
 #, python-brace-format
 msgid "extension not loaded, {extension}"
 msgstr "\"{extension}\" wurde nicht geladen!"
 
-#: extensions/extensionsmanagement.py:47 extensions/extensionsmanagement.py:65
-#: extensions/extensionsmanagement.py:100
-#: extensions/extensionsmanagement.py:118
-#: extensions/extensionsmanagement.py:141
-#: extensions/extensionsmanagement.py:159
+#: extensions/extensionsmanagement.py:49 extensions/extensionsmanagement.py:67
+#: extensions/extensionsmanagement.py:102
+#: extensions/extensionsmanagement.py:120
+#: extensions/extensionsmanagement.py:143
+#: extensions/extensionsmanagement.py:161 extensions/verify.py:32
 msgid "Errors"
 msgstr "Fehler"
 
-#: extensions/extensionsmanagement.py:55
+#: extensions/extensionsmanagement.py:57
 #, python-brace-format
 msgid "extension successfully loaded, {extension}"
 msgstr "\"{extension}\" wurde erfolgreich geladen!"
 
-#: extensions/extensionsmanagement.py:65 extensions/extensionsmanagement.py:118
-#: extensions/extensionsmanagement.py:159
+#: extensions/extensionsmanagement.py:67 extensions/extensionsmanagement.py:120
+#: extensions/extensionsmanagement.py:161
 msgid "extension blacklist"
-msgstr "Die Erweiterung steht auf der schwarzen Liste und darf nicht geladen/deaktiviert/neugeladen werden."
+msgstr ""
+"Die Erweiterung steht auf der schwarzen Liste und darf nicht geladen/"
+"deaktiviert/neugeladen werden."
 
-#: extensions/extensionsmanagement.py:98 extensions/extensionsmanagement.py:116
+#: extensions/extensionsmanagement.py:100
+#: extensions/extensionsmanagement.py:118
 #, python-brace-format
 msgid "extension not unloaded, {extension}"
 msgstr "\"{extension}\" wurde nicht deaktiviert!"
 
-#: extensions/extensionsmanagement.py:108
+#: extensions/extensionsmanagement.py:110
 #, python-brace-format
 msgid "extension successfully unloaded, {extension}"
 msgstr "\"{extension}\" wurde erfolgreich deaktiviert!"
 
-#: extensions/extensionsmanagement.py:139
-#: extensions/extensionsmanagement.py:157
+#: extensions/extensionsmanagement.py:141
+#: extensions/extensionsmanagement.py:159
 #, python-brace-format
 msgid "extension not reloaded, {extension}"
 msgstr "\"{extension}\" wurde nicht neugeladen!"
 
-#: extensions/extensionsmanagement.py:149
+#: extensions/extensionsmanagement.py:151
 #, python-brace-format
 msgid "extension successfully reloaded, {extension}"
 msgstr "\"{extension}\" wurde erfolgreich neugeladen!"
 
-#: extensions/extensionsmanagement.py:171
+#: extensions/extensionsmanagement.py:173
 msgid "loaded extensions"
 msgstr "Geladene Erweiterungen:"
 
-#: extensions/extensionsmanagement.py:175
+#: extensions/extensionsmanagement.py:177
 msgid "unloaded extensions"
 msgstr "Deaktivierte Erweiterungen:"
 
-#: extensions/extensionsmanagement.py:184
-#: extensions/extensionsmanagement.py:192
+#: extensions/extensionsmanagement.py:186
+#: extensions/extensionsmanagement.py:194
 msgid "no extensions"
 msgstr "Keine Erweiterungen"
 
-#: extensions/extensionsmanagement.py:184
+#: extensions/extensionsmanagement.py:186
 msgid "no extensions loaded"
 msgstr "Es sind keine Erweiterungen geladen!"
 
-#: extensions/extensionsmanagement.py:192
+#: extensions/extensionsmanagement.py:194
 msgid "no extensions unloaded"
 msgstr "Es sind keine Erweiterungen deaktiviert!"
 
-#: extensions/fun.py:12
+#: extensions/fun.py:14
 #, python-brace-format
 msgid "dice role, {mention}, {dice}"
-msgstr "{mention}\nDer Würfel zeigt: {dice}"
+msgstr ""
+"{mention}\n"
+"Der Würfel zeigt: {dice}"
+
+#: extensions/verify.py:26
+msgid "unsupported"
+msgstr "Nicht unterstützt"
+
+#: extensions/verify.py:27
+msgid "only supported in dm"
+msgstr ""
+"Diese Aktion kann nur bei privaten Nachrichten an mich genutzt werden :"
+"mailbox:"
+
+#: extensions/verify.py:33
+msgid "provide username"
+msgstr ""
+"Um dich zu verifizieren musst du den Nutzernamen deiner FH-Mail angeben\n"
+"**Beispiel:** `!verify max.mustermann`"
+
+#: extensions/verify.py:40
+#, python-brace-format
+msgid "user already verified {mail} {username}"
+msgstr ""
+"Du bist bereits mit **{mail}** verifiziert! :open_mouth:\nWenn du deine Mail "
+"ändern möchtest, benutze `!reverify {username}`"
+
+#: extensions/verify.py:46
+#, python-brace-format
+msgid "already sent verification {mail} {username}"
+msgstr ""
+"Ich habe bereits eine Mail an **{mail}** für dich versandt :thinking:\n"
+"Falls du die Mail nicht gefunden hast, vergess nicht in deinem Spam-Ordner "
+"nachzuschauen! :recycle:\n"
+"Ich habe dir die gleiche Mail ein weiteres Mal geschickt.\n"
+"Wenn du deine Mail ändern möchtest, benutze `!reverify {username}`"
+
+#: extensions/verify.py:53
+#, python-brace-format
+msgid "sent verification mail {username}"
+msgstr ""
+"Ich habe eine Mail an **{username}@alumni.fh-aachen.de** verschickt :"
+"e_mail:\n"
+"Klicke auf den Link :link: in der Mail um deinen Account zu verifizieren!"

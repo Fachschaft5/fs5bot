@@ -5,7 +5,7 @@ tmux_session="fs5Bot"
 
 # setup system variables
 app_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/"
-declare -a required_packages=("python3" "python3-pip" "python3-setuptools" "tmux" "git")
+declare -a required_packages=("python3" "pip3" "tmux" "git" "alembic")
 missing_package=false
 
 # go to application dir
@@ -27,7 +27,7 @@ restart() {
 update_files() {
     # update by cloning from github
     echo "Update..."
-	#cd $app_dir 
+	#cd $app_dir
     #git clone https://github.com/TitusKirch/uninteresting-bot.git --branch feat/first_release tmp
     #cp -a tmp/* $app_dir
 	#chmod +x bot.sh
@@ -50,7 +50,7 @@ update_all() {
 }
 language_update() {
     # get all textes in python files
-    find . -iname "*.py" | xargs xgettext -d base -p languages -L Python
+    find . -iname "*.py" -not -path '*/venv/*'| xargs xgettext -d base -p languages -L Python
 
     # cd to languages folder 
     cd languages/
@@ -70,7 +70,7 @@ language_update() {
     done
 }
 language_generate() {
-    # cd to languages folder 
+    # cd to languages folder
     cd languages/
 
     # update all languages
@@ -88,18 +88,9 @@ language_generate() {
 
 # check all required packages
 for pkg in "${required_packages[@]}"; do
-    # check if pkg is installed
-	if [ $(dpkg-query -W -f='${Status}' $pkg 2>/dev/null | grep -c "ok installed") -eq 1 ]; then
-		:
-	else
-        # ask to install pkg
-		read -p "$pkg is not installed. Do you want to install it? (y/n)" request
-		if  [ $request == "y" ];then
-			apt-get install $pkg
-		else
-			missing_package=true
-		fi
-	fi
+  if [ -z $(which $pkg) ]; then
+    missing_package=true
+  fi
 done
 
 # check for command
