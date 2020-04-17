@@ -47,6 +47,7 @@ We use [SemVer](http://semver.org/) for versioning. For available versions, see 
 * [discord.py](https://github.com/Rapptz/discord.py) - An API wrapper for Discord written in Python.
 * [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy) - The Database Toolkit for Python.
 * [Alembic](https://github.com/sqlalchemy/alembic) - a database migrations tool for SQLAlchemy.
+* Flask
 
 ## Authors
 
