@@ -1,5 +1,6 @@
 import logging
 import smtplib
+import ssl
 from uuid import uuid4
 
 from discord import Color, ChannelType
@@ -71,11 +72,16 @@ Visit this link to verify your Discord account:
 
 Best regards
 """
+        context = ssl.create_default_context()
 
         try:
-            client = smtplib.SMTP_SSL(self.config['verification']['mail_server'], 465)
+            client = smtplib.SMTP(self.config['verification']['mail_server'], 587)
+            client.ehlo()
+            client.starttls(context=context)
+            client.ehlo()
             client.login(self.config['verification']['mail_user'], self.config['verification']['mail_pass'])
             client.sendmail(self.config['verification']['mail_user'], [mail_address], message)
+            client.quit()
         except smtplib.SMTPException as err:
             logging.error(str(err))
 
